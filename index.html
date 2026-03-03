@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone | Pro Layout</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="top-nav">
+            <div class="nav-left">
+                <i data-lucide="music" class="logo-icon" style="color: #1db954;"></i>
+            </div>
+            <div class="nav-center">
+                <button class="home-btn"><i data-lucide="home"></i></button>
+                <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="search-input" placeholder="What do you want to play?">
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="user-profile">S</div>
+            </div>
+        </header>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <div class="lib-header">
+                    <div class="lib-title">
+                        <i data-lucide="library"></i>
+                        <span>Your Library</span>
+                    </div>
+                    <button class="add-playlist-btn" id="create-playlist">
+                        <i data-lucide="plus"></i>
+                    </button>
+                </div>
+                <div class="lib-scroll">
+                    <ul id="playlist-list" class="playlists"></ul>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <section id="search-results-section" style="display: none; margin-bottom: 30px; padding: 20px;">
+                    <div class="search-layout" style="display: grid; grid-template-columns: 2fr 3fr; gap: 24px;">
+                        <div class="top-result-box">
+                            <h2 style="margin-bottom: 15px;">Top result</h2>
+                            <div id="top-result-card" class="big-card"></div>
+                        </div>
+                        <div class="songs-list-box">
+                            <h2 style="margin-bottom: 15px;">Songs</h2>
+                            <div id="search-songs-list" class="mini-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="main-library-section">
+                    <section class="content-section">
+                        <h2>Latest Song's</h2>
+                        <div class="grid-container" id="grid-latest"></div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2>No Copyright</h2>
+                        <div class="grid-container" id="grid-nocopyright"></div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2>English Song's</h2>
+                        <div class="grid-container" id="grid-english"></div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2>Hindi Song's</h2>
+                        <div class="grid-container" id="grid-hindi"></div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2>Other Song's</h2>
+                        <div class="grid-container" id="grid-other"></div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <footer class="player">
+            <div class="song-info">
+                <img src="https://via.placeholder.com/56" id="current-album-art">
+                <div class="track-details">
+                    <div class="track-name" id="track-title">Select a song</div>
+                    <div class="artist-name" id="track-artist">Artist</div>
+                </div>
+                <button id="open-modal-btn" class="icon-btn">
+                    <i data-lucide="plus-circle"></i>
+                </button>
+            </div>
+
+            <div class="player-controls">
+                <div class="control-buttons">
+                    <button id="prev-btn"><i data-lucide="skip-back"></i></button>
+                    <button id="play-btn" class="play-trigger"><i data-lucide="play"></i></button>
+                    <button id="next-btn"><i data-lucide="skip-forward"></i></button>
+                </div>
+                <div class="progress-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="progress-bar" value="0" min="0" max="100">
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+
+            <div class="volume-controls">
+                <i data-lucide="volume-2"></i>
+                <input type="range" id="volume-slider" value="70" min="0" max="100">
+            </div>
+        </footer>
+    </div>
+
+    <div id="playlist-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add to playlist</h3>
+                <button id="close-modal">&times;</button>
+            </div>
+            <div id="modal-list" class="modal-body"></div>
+            <button id="done-btn" class="done-btn">Done</button>
+        </div>
+    </div>
+
+    <div id="create-playlist-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Playlist</h3>
+                <button id="close-create-modal" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="new-playlist-name" placeholder="Playlist Name" 
+                       style="width: 100%; padding: 12px; background: #3e3e3e; border: none; border-radius: 4px; color: white; margin-bottom: 10px; outline: none;">
+            </div>
+            <button id="save-playlist-btn" class="done-btn">Create</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

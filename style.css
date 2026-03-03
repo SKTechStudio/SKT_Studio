@@ -1,0 +1,558 @@
+/* Root Variables for Consistency */
+:root {
+    --bg-black: #000000;
+    --bg-dark: #121212;
+    --bg-panel: #181818;
+    --bg-card: #181818;
+    --bg-card-hover: #282828;
+    --text-main: #ffffff;
+    --text-muted: #b3b3b3;
+    --spotify-green: #1db954;
+    --nav-height: 64px;
+    --player-height: 90px;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-main);
+    overflow: hidden; /* Prevents body scroll */
+}
+
+/* Main Grid Container */
+.container {
+    display: grid;
+    grid-template-rows: var(--nav-height) 1fr var(--player-height);
+    height: 100vh;
+}
+
+/* --- 1. TOP NAV BAR --- */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    background-color: var(--bg-black);
+}
+
+.logo-icon {
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 1 500px;
+}
+
+.home-btn {
+    background: #1f1f1f;
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.home-btn:hover {
+    transform: scale(1.05);
+}
+
+.search-bar {
+    background: #1f1f1f;
+    border-radius: 500px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+    border: 1px solid transparent;
+    transition: border 0.2s;
+}
+
+.search-bar:focus-within {
+    border: 1px solid white;
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.nav-right .user-profile {
+    width:40px;
+    height: 40px;
+    background: #e2864c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* --- 2. MAIN WRAPPER (Library + Songs) --- */
+.main-wrapper {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 8px;
+    padding: 0 8px;
+    overflow: hidden;
+}
+
+/* Left Panel: Sidebar/Library */
+.sidebar {
+    background-color: var(--bg-panel);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lib-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.playlists {
+    list-style: none;
+    overflow-y: auto;
+}
+
+.playlists li {
+    padding: 10px 8px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.playlists li:hover {
+    background: #2a2a2a;
+    color: white;
+}
+
+/* Right Panel: Main Content */
+.main-content {
+    background: linear-gradient(to bottom, #222, var(--bg-dark));
+    border-radius: 8px;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.content-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    &::-webkit-scrollbar {display: none;}
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+}
+
+.card {
+    background: transparent;
+    padding: 16px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    flex: 0 0 150px; 
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Jo gaana baj raha hai uska style */
+.card.active-card {
+    border: 1px solid #1db954;
+    background: #282828;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+.card.active-card h4 {
+    color: #1db954; /* Spotify Green */
+}
+
+/* Search bar focus effect */
+.search-bar:focus-within {
+    border: 2px solid white;
+    background: #2a2a2a;
+}
+
+
+.card:hover {
+    background: var(--bg-card-hover);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.card h4 {
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* --- 3. PLAYER BAR --- */
+.player {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 0 16px;
+    background-color: var(--bg-black);
+}
+
+/* Song Info (Left) */
+.song-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.song-info img {
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.track-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.artist-name {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Player Controls (Center) */
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 500px;
+    justify-self: center;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.control-buttons button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s, transform 0.1s;
+}
+
+.control-buttons button:hover {
+    color: white;
+}
+
+.play-trigger {
+    background: white !important;
+    color: black !important;
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-trigger:hover {
+    transform: scale(1.1);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Volume (Right) */
+.volume-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-self: end;
+    width: 150px;
+}
+
+/* Custom Range Inputs */
+input[type="range"] {
+    flex-grow: 1;
+    accent-color: var(--spotify-green);
+    cursor: pointer;
+    height: 4px;
+}
+
+input[type="range"]:hover {
+    accent-color: #1ed760;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* Sidebar Header with Plus Button */
+.lib-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    color: var(--text-muted);
+}
+
+.lib-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+}
+
+.add-playlist-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    transition: 0.2s;
+}
+
+.add-playlist-btn:hover {
+    background: #282828;
+    color: white;
+}
+
+/* Playlist List Styling */
+.playlists {
+    list-style: none;
+    padding: 0 8px;
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.playlist-item:hover {
+    background: #1a1a1a;
+}
+
+.playlist-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    background: #282828;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.liked-icon {
+    background: linear-gradient(135deg, #450af5, #c4efd9);
+    color: white;
+}
+
+.playlist-meta h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.playlist-meta p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Modal (Popup) Styles */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 { font-size: 18px; }
+
+#close-modal {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.playlist-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #3e3e3e;
+}
+
+.playlist-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--spotify-green);
+    cursor: pointer;
+}
+
+.done-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 500px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#open-modal-btn{
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0;
+}
+
+.done-btn:hover { transform: scale(1.02); }
+
+/* Responsiveness */
+@media (max-width: 900px) {
+    .main-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        display: none; /* Mobile par sidebar hide kar diya simple rakhne ke liye */
+    }
+    .player {
+        grid-template-columns: 1fr 1fr;
+    }
+    .volume-controls {
+        display: none;
+    }
+    .home-btn {
+        display: none;
+    }
+    .search-bar{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .card {
+    padding: 10px;
+    border-radius: 0;
+   }
+   .card:hover {
+    background-color: transparent;
+   }
+   .card img {
+    border-radius: 4px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+   }
+   .main-content {
+    background: transparent;
+    border-radius: 0;
+    overflow-y: auto;
+    padding: 0;
+}
+}
